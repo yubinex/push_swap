@@ -3,7 +3,7 @@
 ## Foundation
 
 ### Stack structure
-- [] Define node type (value, next, prev)
+- [ ] Define node type (value, next, prev)
 - [ ] Define stack type (top, bottom, size)
 - [ ] `stack_new` — allocate and return empty stack
 - [ ] `stack_push` — push a value to the top
