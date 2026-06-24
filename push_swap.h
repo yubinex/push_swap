@@ -71,4 +71,16 @@ int					stack_pop(t_stack *stack);
 int					stack_peek(t_stack *stack);
 void				stack_free(t_stack *stack);
 
+void				op_sa(t_state *state);
+void				op_sb(t_state *state);
+void				op_ss(t_state *state);
+void				op_pa(t_state *state);
+void				op_pb(t_state *state);
+void				op_ra(t_state *state);
+void				op_rb(t_state *state);
+void				op_rr(t_state *state);
+void				op_rra(t_state *state);
+void				op_rrb(t_state *state);
+void				op_rrr(t_state *state);
+
 #endif
