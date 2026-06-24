@@ -83,4 +83,14 @@ void				op_rra(t_state *state);
 void				op_rrb(t_state *state);
 void				op_rrr(t_state *state);
 
+void				free_state(t_state *state);
+void				error_exit(t_state *state);
+int					parse_args(int argc, char **argv, t_state *state);
+double				compute_disorder(t_stack *stack);
+int					is_sorted(t_stack *stack);
+void				sort_simple(t_state *state);
+void				sort_medium(t_state *state);
+void				sort_complex(t_state *state);
+void				sort_adaptive(t_state *state);
+
 #endif
