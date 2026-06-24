@@ -8,7 +8,10 @@ SRCS = src/push_swap.c \
        src/ops_swap.c \
        src/ops_push.c \
        src/ops_rotate.c \
-       src/ops_rev_rotate.c
+       src/ops_rev_rotate.c \
+       src/parse.c \
+       src/disorder.c \
+       src/sort.c
 
 OBJS = $(SRCS:.c=.o)
 
