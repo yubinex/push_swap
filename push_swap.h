@@ -93,4 +93,6 @@ void				sort_medium(t_state *state);
 void				sort_complex(t_state *state);
 void				sort_adaptive(t_state *state);
 
+void				bubble_sort(t_state *state);
+
 #endif
