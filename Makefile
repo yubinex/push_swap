@@ -12,21 +12,24 @@ SRCS = src/push_swap.c \
        src/parse.c \
        src/disorder.c \
        src/sort.c \
-       src/bubble_sort.c \
        src/complex_sort.c
 
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = obj
+OBJS    = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)

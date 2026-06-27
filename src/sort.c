@@ -12,6 +12,11 @@
 
 #include "../push_swap.h"
 
+void	sort_simple(t_state *state)
+{
+	(void)state;
+}
+
 void	sort_medium(t_state *state)
 {
 	(void)state;
