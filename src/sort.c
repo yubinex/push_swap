@@ -6,23 +6,13 @@
 /*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 06:00:00 by jhauck            #+#    #+#             */
-/*   Updated: 2026/06/24 15:16:44 by jhauck           ###   ########.fr       */
+/*   Updated: 2026/06/27 06:21:38 by jhauck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	sort_simple(t_state *state)
-{
-	(void)state;
-}
-
 void	sort_medium(t_state *state)
-{
-	(void)state;
-}
-
-void	sort_complex(t_state *state)
 {
 	(void)state;
 }

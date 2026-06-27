@@ -12,7 +12,8 @@ SRCS = src/push_swap.c \
        src/parse.c \
        src/disorder.c \
        src/sort.c \
-       src/bubble_sort.c
+       src/bubble_sort.c \
+       src/complex_sort.c
 
 OBJS = $(SRCS:.c=.o)
 
