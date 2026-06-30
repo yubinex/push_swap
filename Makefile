@@ -12,7 +12,8 @@ SRCS = src/push_swap.c \
        src/parse.c \
        src/disorder.c \
        src/sort.c \
-       src/complex_sort.c
+       src/complex_sort.c \
+       src/bench.c
 
 OBJ_DIR = obj
 OBJS    = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)

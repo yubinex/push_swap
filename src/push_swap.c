@@ -74,6 +74,7 @@ int	main(int argc, char **argv)
 	}
 	state.disorder = compute_disorder(state.a);
 	run_strategy(&state);
+	print_bench(&state);
 	free_state(&state);
 	return (0);
 }
