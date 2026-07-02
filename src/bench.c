@@ -6,7 +6,7 @@
 /*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 00:00:00 by jhauck            #+#    #+#             */
-/*   Updated: 2026/06/27 00:00:00 by jhauck           ###   ########.fr       */
+/*   Updated: 2026/07/02 08:19:12 by jhauck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,23 @@ static void	write_int(int n)
 
 static void	write_pct(double d)
 {
-	// TODO: implement percentage printing without printf
-	(void)d;
-	write(2, "?", 1);
+	int	integer;
+	int	frac;
+
+	d *= 100.0;
+	integer = (int)d;
+	frac = (int)((d - integer) * 100.0 + 0.5);
+	if (frac >= 100)
+	{
+		integer++;
+		frac = 0;
+	}
+	write_int(integer);
+	write(2, ".", 1);
+	if (frac < 10)
+		write(2, "0", 1);
+	write_int(frac);
+	write(2, "%", 1);
 }
 
 static void	print_strategy(t_state *state)
