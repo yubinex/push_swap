@@ -14,18 +14,26 @@
 
 void	op_pa(t_state *state)
 {
+	int	idx;
+
 	if (!state->b->size)
 		return ;
+	idx = state->b->top->index;
 	stack_push(state->a, stack_pop(state->b));
+	state->a->top->index = idx;
 	state->ops.pa++;
 	write(1, "pa\n", 3);
 }
 
 void	op_pb(t_state *state)
 {
+	int	idx;
+
 	if (!state->a->size)
 		return ;
+	idx = state->a->top->index;
 	stack_push(state->b, stack_pop(state->a));
+	state->b->top->index = idx;
 	state->ops.pb++;
 	write(1, "pb\n", 3);
 }
