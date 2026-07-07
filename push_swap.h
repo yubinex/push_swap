@@ -96,5 +96,13 @@ void				sort_adaptive(t_state *state);
 void				print_bench(t_state *state);
 
 void				bubble_sort(t_state *state);
+int 				ft_sqrt(int n);
+int					has_index_range(t_stack *stack, int start, int end);
+int					max_pos(t_stack *stack);
+void				push_chunks(t_state *state);
+int					*copy_values(t_stack *stack);
+void				sort_array(int *arr, int size);
+void				assign_indices(t_stack *stack);
+void				push_back_sorted(t_state *state);
 
 #endif

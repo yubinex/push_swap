@@ -1,4 +1,5 @@
 #include "../push_swap.h"
+#include <stdio.h>
 
 int ft_sqrt(int n) //Returns the integer square root of n(It finds the largest integer i)
 {
@@ -8,11 +9,6 @@ int ft_sqrt(int n) //Returns the integer square root of n(It finds the largest i
     while (i * i <= n)
         i++;
     return (i - 1);
-}
-
-int chunk_count(int size) //This is the same as ft_sqrt
-{
-   return (ft_sqrt(size));
 }
 
 int has_index_range(t_stack *stack, int start, int end) //checks whether stack A has at least one node with an index that belongs to a chunk
@@ -64,7 +60,10 @@ void push_chunks(t_state *state)
     int size;
 
     size = state->a->size; //Compute chunk information
+    assign_indices(state->a);  
     chunks = ft_sqrt(size);
+    if (chunks == 0)
+        chunks = 1;
     chunk_size = size / chunks;
 
     chunk = 0;
@@ -76,19 +75,47 @@ void push_chunks(t_state *state)
             end = size - 1;
         else
             end = (chunk + 1) * chunk_size - 1;
-
         while (has_index_range(state->a, start, end))
         {
             if (state->a->top->index >= start
                 && state->a->top->index <= end) //Top belongs to the chunk
             {
+                printf("pb\n");
+
                 op_pb(state);
                 if (state->b->top->index < (start + end) / 2) //Keep smaller values deeper in B
+                {
+                    printf("rb\n");
                     op_rb(state);
+                }
             }
             else
+            {
+                printf("ra\n");
                 op_ra(state); //Top doesn't belong to this chunk
+            }
         }
         chunk++;
+    }
+}
+
+void push_back_sorted(t_state *state)
+{
+    int pos;
+
+    while (state->b->size)
+    {
+        pos = max_pos(state->b);
+
+        if (pos <= state->b->size / 2)
+            while (pos--)
+                op_rb(state);
+        else
+        {
+            pos = state->b->size - pos;
+            while (pos--)
+                op_rrb(state);
+        }
+        op_pa(state);
     }
 }
