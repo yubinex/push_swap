@@ -15,6 +15,7 @@ SRCS = src/push_swap.c \
        src/complex_sort.c \
        src/bench.c \
        src/chunk_based_sorting.c \
+       src/chunk_based_helpers.c \
        src/indices.c
 
 OBJ_DIR = obj

@@ -104,5 +104,7 @@ int					*copy_values(t_stack *stack);
 void				sort_array(int *arr, int size);
 void				assign_indices(t_stack *stack);
 void				push_back_sorted(t_state *state);
+int					max_pos(t_stack *stack);
+int					find_chunk_pos(t_stack *a, int start, int end);
 
 #endif

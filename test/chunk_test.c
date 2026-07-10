@@ -128,8 +128,6 @@ int main(void)
     return (0);
 }
 
-//test make
-
 // TEST_NAME = test_chunks
 
 // TEST_SRCS = test/chunk_test.c \
@@ -144,6 +142,7 @@ int main(void)
 //             src/complex_sort.c \
 //             src/bench.c \
 //             src/chunk_based_sorting.c \
+//             src/chunk_based_helpers.c \
 //             src/indices.c
 
 // test_chunks:

@@ -1,54 +1,4 @@
 #include "../push_swap.h"
-#include <stdio.h>
-
-int ft_sqrt(int n) //Returns the integer square root of n(It finds the largest integer i)
-{
-    int i;
-
-    i = 1;
-    while (i * i <= n)
-        i++;
-    return (i - 1);
-}
-
-int has_index_range(t_stack *stack, int start, int end) //checks whether stack A has at least one node with an index that belongs to a chunk
-{
-    t_node *tmp;
-
-    tmp = stack->top;
-    while (tmp)
-    {
-        if (tmp->index >= start && tmp->index <= end)
-            return (1);
-        tmp = tmp->next;
-    }
-    return (0);
-}
-
-int max_pos(t_stack *stack) //returns largest index in a stack
-{
-    t_node  *tmp;
-    int     max;
-    int     pos;
-    int     i;
-
-    tmp = stack->top;
-    max = tmp->index;
-    pos = 0;
-    i = 0;
-
-    while (tmp)
-    {
-        if (tmp->index > max)
-        {
-            max = tmp->index;
-            pos = i;
-        }
-        tmp = tmp->next;
-        i++;
-    }
-    return (pos);
-}
 
 void push_chunks(t_state *state)
 {
@@ -58,6 +8,7 @@ void push_chunks(t_state *state)
     int start;
     int end;
     int size;
+    int pos;
 
     size = state->a->size; //Compute chunk information
     assign_indices(state->a);  
@@ -77,23 +28,22 @@ void push_chunks(t_state *state)
             end = (chunk + 1) * chunk_size - 1;
         while (has_index_range(state->a, start, end))
         {
-            if (state->a->top->index >= start
-                && state->a->top->index <= end) //Top belongs to the chunk
+            pos = find_chunk_pos(state->a, start, end);
+            if (pos <= state->a->size / 2)
             {
-                printf("pb\n");
-
-                op_pb(state);
-                if (state->b->top->index < (start + end) / 2) //Keep smaller values deeper in B
-                {
-                    printf("rb\n");
-                    op_rb(state);
-                }
+                while (pos--)
+                    op_ra(state);
             }
             else
             {
-                printf("ra\n");
-                op_ra(state); //Top doesn't belong to this chunk
+                pos = state->a->size - pos;
+                while (pos--)
+                    op_rra(state);
             }
+            op_pb(state);
+
+            if (state->b->top->index < (start + end) / 2)
+                op_rb(state);
         }
         chunk++;
     }
