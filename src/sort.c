@@ -14,7 +14,7 @@
 
 void	sort_simple(t_state *state)
 {
-	(void)state;
+	bubble_sort(state);
 }
 
 void	sort_medium(t_state *state)
