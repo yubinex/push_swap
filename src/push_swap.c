@@ -48,6 +48,11 @@ void	error_exit(t_state *state)
 
 static void	run_strategy(t_state *state)
 {
+	if (state->a->size <= 5)
+	{
+		sort_tiny(state);
+		return ;
+	}
 	if (state->strategy == STRATEGY_SIMPLE)
 		sort_simple(state);
 	else if (state->strategy == STRATEGY_MEDIUM)

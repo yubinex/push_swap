@@ -19,7 +19,8 @@ void	sort_simple(t_state *state)
 
 void	sort_medium(t_state *state)
 {
-	(void)state;
+	push_chunks(state);
+	push_back_sorted(state);
 }
 
 /*

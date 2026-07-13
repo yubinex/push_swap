@@ -16,7 +16,8 @@ SRCS = src/push_swap.c \
        src/bench.c \
        src/chunk_based_sorting.c \
        src/chunk_based_helpers.c \
-       src/indices.c
+       src/indices.c \
+       src/sort_tiny.c
 
 OBJ_DIR = obj
 OBJS    = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
