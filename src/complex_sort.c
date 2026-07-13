@@ -12,41 +12,16 @@
 
 #include "../push_swap.h"
 
-static int	rank_of_val(t_state *state, int val)
-{
-	t_node	*current;
-	int		count;
-
-	count = 0;
-	current = state->a->top;
-	while (current)
-	{
-		if (current->value < val)
-			count++;
-		current = current->next;
-	}
-	current = state->b->top;
-	while (current)
-	{
-		if (current->value < val)
-			count++;
-		current = current->next;
-	}
-	return (count);
-}
-
 static void	radix_pass(t_state *state, int size, int bit)
 {
 	int	i;
 	int	pushed;
-	int	rank;
 
 	i = 0;
 	pushed = 0;
 	while (i < size)
 	{
-		rank = rank_of_val(state, state->a->top->value);
-		if ((rank >> bit) & 1)
+		if ((state->a->top->index >> bit) & 1)
 			op_ra(state);
 		else
 		{
@@ -69,6 +44,7 @@ void	sort_complex(t_state *state)
 	int	bit;
 
 	size = state->a->size;
+	assign_indices(state->a);
 	bits = 0;
 	while ((1 << bits) < size)
 		bits++;
