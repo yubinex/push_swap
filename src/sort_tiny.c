@@ -6,7 +6,7 @@
 /*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 00:00:00 by jhauck            #+#    #+#             */
-/*   Updated: 2026/06/25 00:00:00 by jhauck           ###   ########.fr       */
+/*   Updated: 2026/07/15 00:00:00 by jhauck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void	sort3(t_state *state)
 		op_sa(state);
 }
 
-static void	push_min(t_state *state)
+static int	find_min_pos(t_stack *stack)
 {
 	t_node	*node;
 	int		min;
 	int		pos;
 	int		i;
 
-	node = state->a->top;
+	node = stack->top;
 	min = node->value;
 	pos = 0;
 	i = 0;
@@ -50,6 +50,14 @@ static void	push_min(t_state *state)
 		node = node->next;
 		i++;
 	}
+	return (pos);
+}
+
+static void	push_min(t_state *state)
+{
+	int	pos;
+
+	pos = find_min_pos(state->a);
 	if (pos <= state->a->size / 2)
 		while (pos-- > 0)
 			op_ra(state);

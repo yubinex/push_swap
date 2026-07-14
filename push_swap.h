@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubaur <jubaur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 17:17:18 by jhauck            #+#    #+#             */
-/*   Updated: 2026/07/14 11:30:49 by jubaur           ###   ########.fr       */
+/*   Updated: 2026/07/15 00:30:15 by jhauck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ typedef struct s_state
 
 typedef struct s_chunk
 {
-	int	size;
-	int	chunks;
-	int	chunk_size;
-	int	start;
-	int	end;
-}	t_chunk;
+	int				size;
+	int				chunks;
+	int				chunk_size;
+	int				start;
+	int				end;
+}					t_chunk;
 
 t_stack				*stack_new(void);
 void				stack_push(t_stack *stack, int value);
@@ -106,7 +106,7 @@ void				sort_adaptive(t_state *state, t_chunk *c);
 void				print_bench(t_state *state);
 
 void				bubble_sort(t_state *state);
-int 				ft_sqrt(int n);
+int					ft_sqrt(int n);
 int					has_index_range(t_stack *stack, int start, int end);
 int					max_pos(t_stack *stack);
 void				push_chunks(t_state *state, t_chunk *c);

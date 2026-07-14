@@ -6,51 +6,39 @@
 /*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 06:00:00 by jhauck            #+#    #+#             */
-/*   Updated: 2026/06/24 06:00:00 by jhauck           ###   ########.fr       */
+/*   Updated: 2026/07/15 00:19:39 by jhauck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static long	str_to_long(char *s)
+static int	parse_int(char *s, int *out)
 {
 	long	val;
 	int		sign;
 	int		i;
 
-	val = 0;
 	sign = 1;
 	i = 0;
-	if (s[0] == '-')
+	if (s[i] == '-')
 		sign = -1;
-	if (s[0] == '+' || s[0] == '-')
-		i = 1;
+	if (s[i] == '+' || s[i] == '-')
+		i++;
+	if (!(s[i] >= '0' && s[i] <= '9'))
+		return (0);
+	val = 0;
 	while (s[i] >= '0' && s[i] <= '9')
 	{
 		val = val * 10 + (s[i] - '0');
 		i++;
 	}
-	return (val * sign);
-}
-
-static int	valid_int_str(char *s)
-{
-	int		i;
-	int		start;
-	long	val;
-
-	i = 0;
-	if (s[i] == '+' || s[i] == '-')
-		i++;
-	start = i;
-	while (s[i] >= '0' && s[i] <= '9')
-		i++;
-	if (i == start || s[i] != '\0')
+	if (s[i] != '\0')
 		return (0);
-	if (i - start > 10)
+	val *= sign;
+	if (val < INT_MIN || val > INT_MAX)
 		return (0);
-	val = str_to_long(s);
-	return (val >= INT_MIN && val <= INT_MAX);
+	*out = (int)val;
+	return (1);
 }
 
 static int	has_duplicate(t_stack *stack)
@@ -73,18 +61,44 @@ static int	has_duplicate(t_stack *stack)
 	return (0);
 }
 
-static int	build_stack(int start, int argc, char **argv, t_state *state)
+static int	process_arg_string(char *s, t_state *state)
 {
 	int		i;
-	long	val;
+	int		end;
+	int		init;
+	int		val;
+
+	init = state->a->size;
+	i = 0;
+	while (s[i])
+		i++;
+	i--;
+	while (i >= 0)
+	{
+		while (i >= 0 && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
+			i--;
+		if (i < 0)
+			break ;
+		end = i;
+		while (i >= 0 && s[i] != ' ' && !(s[i] >= 9 && s[i] <= 13))
+			i--;
+		s[end + 1] = '\0';
+		if (!parse_int(&s[i + 1], &val))
+			return (0);
+		stack_push(state->a, val);
+	}
+	return (state->a->size > init);
+}
+
+static int	build_stack(int start, int argc, char **argv, t_state *state)
+{
+	int	i;
 
 	i = argc - 1;
 	while (i >= start)
 	{
-		if (!valid_int_str(argv[i]))
+		if (!process_arg_string(argv[i], state))
 			return (0);
-		val = str_to_long(argv[i]);
-		stack_push(state->a, (int)val);
 		i--;
 	}
 	return (!has_duplicate(state->a));
