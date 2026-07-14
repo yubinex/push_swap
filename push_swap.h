@@ -6,7 +6,7 @@
 /*   By: jubaur <jubaur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 17:17:18 by jhauck            #+#    #+#             */
-/*   Updated: 2026/07/14 10:22:13 by jubaur           ###   ########.fr       */
+/*   Updated: 2026/07/14 11:30:49 by jubaur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ void				push_back_sorted(t_state *state);
 int					max_pos(t_stack *stack);
 int					find_chunk_pos(t_stack *a, int start, int end);
 void				bubble_rotate(t_state *state, int i);
-void				chunks_rotate(t_state *state, t_chunk *c, int chunk);
+void				chunks_rotate(t_state *state, t_chunk *c);
 
 #endif
