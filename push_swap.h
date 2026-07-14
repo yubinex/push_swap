@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: jubaur <jubaur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 17:17:18 by jhauck            #+#    #+#             */
-/*   Updated: 2026/06/19 17:17:18 by jhauck           ###   ########.fr       */
+/*   Updated: 2026/07/14 10:22:13 by jubaur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,15 @@ typedef struct s_state
 	int				silent;
 }					t_state;
 
+typedef struct s_chunk
+{
+	int	size;
+	int	chunks;
+	int	chunk_size;
+	int	start;
+	int	end;
+}	t_chunk;
+
 t_stack				*stack_new(void);
 void				stack_push(t_stack *stack, int value);
 int					stack_pop(t_stack *stack);
@@ -91,21 +100,23 @@ double				compute_disorder(t_stack *stack);
 int					is_sorted(t_stack *stack);
 void				sort_tiny(t_state *state);
 void				sort_simple(t_state *state);
-void				sort_medium(t_state *state);
+void				sort_medium(t_state *state, t_chunk *c);
 void				sort_complex(t_state *state);
-void				sort_adaptive(t_state *state);
+void				sort_adaptive(t_state *state, t_chunk *c);
 void				print_bench(t_state *state);
 
 void				bubble_sort(t_state *state);
 int 				ft_sqrt(int n);
 int					has_index_range(t_stack *stack, int start, int end);
 int					max_pos(t_stack *stack);
-void				push_chunks(t_state *state);
+void				push_chunks(t_state *state, t_chunk *c);
 int					*copy_values(t_stack *stack);
 void				sort_array(int *arr, int size);
 void				assign_indices(t_stack *stack);
 void				push_back_sorted(t_state *state);
 int					max_pos(t_stack *stack);
 int					find_chunk_pos(t_stack *a, int start, int end);
+void				bubble_rotate(t_state *state, int i);
+void				chunks_rotate(t_state *state, t_chunk *c, int chunk);
 
 #endif

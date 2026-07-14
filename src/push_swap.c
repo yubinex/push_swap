@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: jubaur <jubaur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 17:17:31 by jhauck            #+#    #+#             */
-/*   Updated: 2026/06/19 17:17:31 by jhauck           ###   ########.fr       */
+/*   Updated: 2026/07/14 10:26:04 by jubaur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	error_exit(t_state *state)
 	exit(1);
 }
 
-static void	run_strategy(t_state *state)
+static void	run_strategy(t_state *state, t_chunk *c)
 {
 	if (state->a->size <= 5)
 	{
@@ -56,16 +56,17 @@ static void	run_strategy(t_state *state)
 	if (state->strategy == STRATEGY_SIMPLE)
 		sort_simple(state);
 	else if (state->strategy == STRATEGY_MEDIUM)
-		sort_medium(state);
+		sort_medium(state, c);
 	else if (state->strategy == STRATEGY_COMPLEX)
 		sort_complex(state);
 	else
-		sort_adaptive(state);
+		sort_adaptive(state, c);
 }
 
 int	main(int argc, char **argv)
 {
 	t_state	state;
+	t_chunk	c;
 
 	if (argc < 2)
 		return (0);
@@ -78,7 +79,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	state.disorder = compute_disorder(state.a);
-	run_strategy(&state);
+	run_strategy(&state, &c);
 	print_bench(&state);
 	free_state(&state);
 	return (0);

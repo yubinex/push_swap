@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhauck <jhauck@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: jubaur <jubaur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 06:00:00 by jhauck            #+#    #+#             */
-/*   Updated: 2026/06/27 06:21:38 by jhauck           ###   ########.fr       */
+/*   Updated: 2026/07/14 10:21:32 by jubaur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	sort_simple(t_state *state)
 	bubble_sort(state);
 }
 
-void	sort_medium(t_state *state)
+void	sort_medium(t_state *state, t_chunk *c)
 {
-	push_chunks(state);
+	push_chunks(state, c);
 	push_back_sorted(state);
 }
 
@@ -29,12 +29,12 @@ void	sort_medium(t_state *state)
 ** 0.2 <= d < 0.5  -> medium  O(n sqrt(n))
 ** disorder >= 0.5 -> complex O(n log n)
 */
-void	sort_adaptive(t_state *state)
+void	sort_adaptive(t_state *state, t_chunk *c)
 {
 	if (state->disorder < 0.2)
 		sort_simple(state);
 	else if (state->disorder < 0.5)
-		sort_medium(state);
+		sort_medium(state, c);
 	else
 		sort_complex(state);
 }

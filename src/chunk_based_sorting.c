@@ -1,71 +1,115 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   chunk_based_sorting.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jubaur <jubaur@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/14 09:02:30 by jubaur            #+#    #+#             */
+/*   Updated: 2026/07/14 10:25:40 by jubaur           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void push_chunks(t_state *state)
+void	push_chunks(t_state *state, t_chunk *c)
 {
-    int chunks;
-    int chunk_size;
-    int chunk;
-    int start;
-    int end;
-    int size;
-    int pos;
+	int	chunk;
 
-    size = state->a->size; //Compute chunk information
-    assign_indices(state->a);  
-    chunks = ft_sqrt(size);
-    if (chunks == 0)
-        chunks = 1;
-    chunk_size = size / chunks;
-
-    chunk = 0;
-    while (chunk < chunks)
-    {
-        start = chunk * chunk_size; //Compute boundaries
-
-        if (chunk == chunks - 1) //Last chunk special case (without it leftover form division would be lost)
-            end = size - 1;
-        else
-            end = (chunk + 1) * chunk_size - 1;
-        while (has_index_range(state->a, start, end))
-        {
-            pos = find_chunk_pos(state->a, start, end);
-            if (pos <= state->a->size / 2)
-            {
-                while (pos--)
-                    op_ra(state);
-            }
-            else
-            {
-                pos = state->a->size - pos;
-                while (pos--)
-                    op_rra(state);
-            }
-            op_pb(state);
-
-            if (state->b->top->index < (start + end) / 2)
-                op_rb(state);
-        }
-        chunk++;
-    }
+	c->size = state->a->size;
+	assign_indices(state->a);
+	c->chunks = ft_sqrt(c->size);
+	if (c->chunks == 0)
+		c->chunks = 1;
+	c->chunk_size = c->size / c->chunks;
+	chunk = 0;
+	while (chunk < c->chunks)
+	{
+		c->start = chunk * c->chunk_size;
+		if (chunk == c->chunks - 1)
+			c->end = c->size - 1;
+		else
+			c->end = (chunk + 1) * c->chunk_size - 1;
+		while (has_index_range(state->a, c->start, c->end))
+		{
+			chunks_rotate(state, c, chunk);
+		}
+		chunk++;
+	}
 }
 
-void push_back_sorted(t_state *state)
+void	chunks_rotate(t_state *state, t_chunk *c, int chunk)
 {
-    int pos;
+	int	pos;
 
-    while (state->b->size)
-    {
-        pos = max_pos(state->b);
+	c->size = state->a->size;
+	c->start = chunk * c->chunk_size;
+	if (chunk == c->chunks - 1)
+		c->end = c->size - 1;
+	else
+		c->end = (chunk + 1) * c->chunk_size - 1;
+	pos = find_chunk_pos(state->a, c->start, c->end);
+	if (pos <= state->a->size / 2)
+	{
+		while (pos--)
+			op_ra(state);
+	}
+	else
+	{
+		pos = state->a->size - pos;
+		while (pos--)
+			op_rra(state);
+	}
+	op_pb(state);
+	if (state->b->top->index < (c->start + c->end) / 2)
+		op_rb(state);
+}
 
-        if (pos <= state->b->size / 2)
-            while (pos--)
-                op_rb(state);
-        else
-        {
-            pos = state->b->size - pos;
-            while (pos--)
-                op_rrb(state);
-        }
-        op_pa(state);
-    }
+// static void	init_chunks(t_state *state, t_chunk *c)
+// {
+// 	c->size = state->a->size;
+// 	assign_indices(state->a);
+// 	c->chunks = ft_sqrt(c->size);
+// 	if (!c->chunks)
+// 		c->chunks = 1;
+// 	c->chunk_size = c->size / c->chunks;
+// }
+
+// void	push_chunks(t_state *state)
+// {
+// 	t_chunk	c;
+// 	int		chunk;
+
+// 	init_chunks(state, &c);
+// 	chunk = 0;
+// 	while (chunk < c.chunks)
+// 	{
+// 		c.start = chunk * c.chunk_size;
+// 		if (chunk == c.chunks - 1)
+// 			c.end = c.size - 1;
+// 		else
+// 			c.end = (chunk + 1) * c.chunk_size - 1;
+// 		push_chunk(state, c.start, c.end);
+// 		chunk++;
+// 	}
+// }
+
+void	push_back_sorted(t_state *state)
+{
+	int	pos;
+
+	while (state->b->size)
+	{
+		pos = max_pos(state->b);
+		if (pos <= state->b->size / 2)
+			while (pos--)
+				op_rb(state);
+		else
+		{
+			pos = state->b->size - pos;
+			while (pos--)
+				op_rrb(state);
+		}
+		op_pa(state);
+	}
 }
