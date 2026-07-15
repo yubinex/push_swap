@@ -48,8 +48,9 @@ void	error_exit(t_state *state)
 
 static void	run_strategy(t_state *state, t_chunk *c)
 {
-	if (state->a->size <= 5)
+	if (state->a->size <= 5 && state->strategy == STRATEGY_ADAPTIVE)
 	{
+		state->strategy = STRATEGY_TINY;
 		sort_tiny(state);
 		return ;
 	}

@@ -145,7 +145,16 @@ Selects among the three strategies above based on the pre-computed disorder scor
 
 ### Tiny sort (≤ 5 elements)
 
-For inputs of 5 elements or fewer, a dedicated hand-optimized routine is used regardless of the selected strategy.
+When `--adaptive` is selected (the default) and the input has 5 or fewer elements, a dedicated hand-optimized routine is used instead of the three main strategies. Explicit flags (`--simple`, `--medium`, `--complex`) bypass this and run the named algorithm on any input size.
+
+The routine handles each size with the minimum possible operations:
+
+- **Size 2:** swap if out of order (`sa`). At most 1 operation.
+- **Size 3:** a decision tree covers all 6 permutations in at most 2 operations — one rotation to move the maximum to the bottom, then one swap if the top two are still inverted.
+- **Size 4:** push the minimum to `b` (at most 2 rotates + `pb`), sort the remaining 3 with the size-3 routine, push the minimum back (`pa`). At most 6 operations.
+- **Size 5:** push the two smallest to `b` in order (at most 4 rotates + 2× `pb`), sort the remaining 3, push both back (`pa pa`). At most 12 operations.
+
+**Complexity argument:** The input size is bounded by a constant (5), so the number of operations is bounded by a constant regardless of input. This is O(1) in the Push_swap operation model.
 
 ## Performance targets
 
@@ -153,6 +162,15 @@ For inputs of 5 elements or fewer, a dedicated hand-optimized routine is used re
 |------------|------|------|-----------|
 | 100 numbers | < 2000 ops | < 1500 ops | < 700 ops |
 | 500 numbers | < 12000 ops | < 8000 ops | < 5500 ops |
+
+## Contributions
+
+| Contributor | Responsibilities |
+|-------------|-----------------|
+| **jhauck** | Core infrastructure (stack, all 11 operations, argument parsing, error handling), disorder metric, benchmark output (`--bench`), LSD radix sort (`--complex`), tiny sort routine |
+| **jubaur** | Strategy dispatcher and main entry point, bubble sort (`--simple`), chunk-based sort (`--medium`), rank index assignment, adaptive threshold logic |
+
+Both contributors were present for and contributed to the design of the overall architecture and the selection of algorithms. All code was reviewed and understood by both before being merged.
 
 ## Resources
 

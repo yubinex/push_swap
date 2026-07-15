@@ -57,7 +57,9 @@ static void	write_pct(double d)
 static void	print_strategy(t_state *state)
 {
 	write(2, "[bench] strategy: ", 18);
-	if (state->strategy == STRATEGY_SIMPLE)
+	if (state->strategy == STRATEGY_TINY)
+		write(2, "Tiny / O(1)", 11);
+	else if (state->strategy == STRATEGY_SIMPLE)
 		write(2, "Simple / O(n^2)", 15);
 	else if (state->strategy == STRATEGY_MEDIUM)
 		write(2, "Medium / O(n sqrt(n))", 21);

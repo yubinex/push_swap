@@ -52,7 +52,8 @@ typedef enum e_strategy
 	STRATEGY_SIMPLE,
 	STRATEGY_MEDIUM,
 	STRATEGY_COMPLEX,
-	STRATEGY_ADAPTIVE
+	STRATEGY_ADAPTIVE,
+	STRATEGY_TINY
 }					t_strategy;
 
 typedef struct s_state
