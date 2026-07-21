@@ -86,7 +86,7 @@ static void	print_ops(t_ops *o)
 	write_int(o->pa);
 	write(2, " pb: ", 5);
 	write_int(o->pb);
-	write(2, " ra: ", 5);
+	write(2, "\n[bench] ra: ", 13);
 	write_int(o->ra);
 	write(2, " rb: ", 5);
 	write_int(o->rb);
