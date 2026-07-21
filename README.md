@@ -172,6 +172,11 @@ The routine handles each size with the minimum possible operations:
 
 Both contributors were present for and contributed to the design of the overall architecture and the selection of algorithms. All code was reviewed and understood by both before being merged.
 
+## Related repositories
+
+- [push_swap_viz](https://github.com/yubinex/push_swap_viz) — interactive visualizer showing each algorithm step by step (GitHub Pages)
+- [simple_push_swap_tester](https://github.com/yubinex/simple_push_swap_tester) — simple tester for verifying correctness and operation counts
+
 ## Resources
 
 - Knuth, D. E. — *The Art of Computer Programming, Vol. 3: Sorting and Searching* — foundational reference on sorting algorithms and complexity
