@@ -20,18 +20,15 @@ static int	parse_int(char *s, int *out)
 
 	sign = 1;
 	i = 0;
+	val = 0;
 	if (s[i] == '-')
 		sign = -1;
 	if (s[i] == '+' || s[i] == '-')
 		i++;
 	if (!(s[i] >= '0' && s[i] <= '9'))
 		return (0);
-	val = 0;
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		val = val * 10 + (s[i] - '0');
-		i++;
-	}
+	while (s[i] >= '0' && s[i] <= '9' && val <= INT_MAX)
+		val = val * 10 + (s[i++] - '0');
 	if (s[i] != '\0')
 		return (0);
 	val *= sign;
