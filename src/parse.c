@@ -111,15 +111,15 @@ int	parse_args(int argc, char **argv, t_state *state)
 	i = 1;
 	while (i < argc && argv[i][0] == '-' && argv[i][1] == '-' && argv[i][2])
 	{
-		if (argv[i][2] == 's')
+		if (flag_eq(argv[i] + 2, "simple"))
 			state->strategy = STRATEGY_SIMPLE;
-		else if (argv[i][2] == 'm')
+		else if (flag_eq(argv[i] + 2, "medium"))
 			state->strategy = STRATEGY_MEDIUM;
-		else if (argv[i][2] == 'c')
+		else if (flag_eq(argv[i] + 2, "complex"))
 			state->strategy = STRATEGY_COMPLEX;
-		else if (argv[i][2] == 'a')
+		else if (flag_eq(argv[i] + 2, "adaptive"))
 			state->strategy = STRATEGY_ADAPTIVE;
-		else if (argv[i][2] == 'b')
+		else if (flag_eq(argv[i] + 2, "bench"))
 			state->bench = 1;
 		else
 			return (0);

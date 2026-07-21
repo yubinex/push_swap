@@ -52,3 +52,13 @@ int	is_sorted(t_stack *stack)
 	}
 	return (1);
 }
+
+int	flag_eq(char *flag, char *name)
+{
+	int	i;
+
+	i = 0;
+	while (flag[i] && name[i] && flag[i] == name[i])
+		i++;
+	return (flag[i] == '\0' && name[i] == '\0');
+}
