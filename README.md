@@ -174,7 +174,7 @@ Both contributors were present for and contributed to the design of the overall 
 
 ## Related repositories
 
-- [push_swap_viz](https://github.com/yubinex/push_swap_viz) — interactive visualizer showing each algorithm step by step (GitHub Pages)
+- [push_swap_viz](https://yubinex.github.io/push_swap_viz/) — interactive visualizer showing each algorithm step by step
 - [simple_push_swap_tester](https://github.com/yubinex/simple_push_swap_tester) — simple tester for verifying correctness and operation counts
 
 ## Resources
