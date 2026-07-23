@@ -76,6 +76,8 @@ int	main(int argc, char **argv)
 		error_exit(&state);
 	if (is_sorted(state.a))
 	{
+		state.disorder = compute_disorder(state.a);
+		print_bench(&state);
 		free_state(&state);
 		return (0);
 	}

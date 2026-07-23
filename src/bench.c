@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-static void	write_int(int n)
+static void	write_int(int fd, int n)
 {
 	char	buf[11];
 	int		i;
@@ -21,7 +21,7 @@ static void	write_int(int n)
 	buf[i] = '\0';
 	if (n == 0)
 	{
-		write(2, "0", 1);
+		write(fd, "0", 1);
 		return ;
 	}
 	while (n > 0)
@@ -30,7 +30,7 @@ static void	write_int(int n)
 		buf[i] = '0' + (n % 10);
 		n /= 10;
 	}
-	write(2, &buf[i], 10 - i);
+	write(fd, &buf[i], 10 - i);
 }
 
 static void	write_pct(double d)
@@ -46,11 +46,11 @@ static void	write_pct(double d)
 		integer++;
 		frac = 0;
 	}
-	write_int(integer);
+	write_int(2, integer);
 	write(2, ".", 1);
 	if (frac < 10)
 		write(2, "0", 1);
-	write_int(frac);
+	write_int(2, frac);
 	write(2, "%", 1);
 }
 
@@ -77,27 +77,27 @@ static void	print_strategy(t_state *state)
 static void	print_ops(t_ops *o)
 {
 	write(2, "[bench] sa: ", 12);
-	write_int(o->sa);
+	write_int(2, o->sa);
 	write(2, " sb: ", 5);
-	write_int(o->sb);
+	write_int(2, o->sb);
 	write(2, " ss: ", 5);
-	write_int(o->ss);
+	write_int(2, o->ss);
 	write(2, " pa: ", 5);
-	write_int(o->pa);
+	write_int(2, o->pa);
 	write(2, " pb: ", 5);
-	write_int(o->pb);
+	write_int(2, o->pb);
 	write(2, "\n[bench] ra: ", 13);
-	write_int(o->ra);
+	write_int(2, o->ra);
 	write(2, " rb: ", 5);
-	write_int(o->rb);
+	write_int(2, o->rb);
 	write(2, " rr: ", 5);
-	write_int(o->rr);
+	write_int(2, o->rr);
 	write(2, " rra: ", 6);
-	write_int(o->rra);
+	write_int(2, o->rra);
 	write(2, " rrb: ", 6);
-	write_int(o->rrb);
+	write_int(2, o->rrb);
 	write(2, " rrr: ", 6);
-	write_int(o->rrr);
+	write_int(2, o->rrr);
 	write(2, "\n", 1);
 }
 
@@ -116,7 +116,7 @@ void	print_bench(t_state *state)
 	write(2, "\n", 1);
 	print_strategy(state);
 	write(2, "[bench] total_ops: ", 19);
-	write_int(total);
+	write_int(2, total);
 	write(2, "\n", 1);
 	print_ops(o);
 }
